@@ -1,0 +1,12 @@
+(library (
+  (name pam_test)
+  (libraries (
+    async
+    core
+    expect_test_helpers
+    pam
+    ))
+  (preprocess (pps (ppx_jane ppxlib.runner)))
+  ))
+
+(jbuild_version 1)

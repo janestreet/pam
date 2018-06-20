@@ -1,0 +1,13 @@
+(library
+ ((name pam)
+  (public_name pam)
+  (libraries (
+    core
+    async
+    ))
+  (library_flags (-cclib -lpam -O2))
+  (c_names (pam_stubs))
+  (preprocess (pps (ppx_jane ppxlib.runner)))
+))
+
+(jbuild_version 1)
