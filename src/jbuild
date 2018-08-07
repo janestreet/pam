@@ -5,7 +5,7 @@
     core
     async
     ))
-  (library_flags (-cclib -lpam ))
+  (library_flags (-cclib -lpam -ccopt -O2))
   (c_names (pam_stubs))
   (preprocess (pps (ppx_jane ppxlib.runner)))
 ))
