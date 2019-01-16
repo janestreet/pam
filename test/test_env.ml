@@ -13,10 +13,12 @@ let%expect_test "pam_getenv non-existent key" =
 
 let%expect_test "pam_putenv" =
   let result =
-    with_pam ~f:(fun t ->
-      let open Or_error.Let_syntax in
-      let%bind () = pam_putenv t ~key ~data:"expect_test" in
-      pam_getenv t ~key) ()
+    with_pam
+      ~f:(fun t ->
+        let open Or_error.Let_syntax in
+        let%bind () = pam_putenv t ~key ~data:"expect_test" in
+        pam_getenv t ~key)
+      ()
   in
   print_s [%message "" ~_:(result : string Or_error.t)];
   [%expect {| (Ok expect_test) |}]
@@ -24,11 +26,13 @@ let%expect_test "pam_putenv" =
 
 let%expect_test "pam_putenv multiple times" =
   let result =
-    with_pam ~f:(fun t ->
-      let open Or_error.Let_syntax in
-      let%bind ()  = pam_putenv t ~key ~data:"expect_test" in
-      let%bind ()  = pam_putenv t ~key ~data:"expect_test_again" in
-      pam_getenv t ~key) ()
+    with_pam
+      ~f:(fun t ->
+        let open Or_error.Let_syntax in
+        let%bind () = pam_putenv t ~key ~data:"expect_test" in
+        let%bind () = pam_putenv t ~key ~data:"expect_test_again" in
+        pam_getenv t ~key)
+      ()
   in
   print_s [%message "" ~_:(result : string Or_error.t)];
   [%expect {| (Ok expect_test_again) |}]
@@ -36,11 +40,13 @@ let%expect_test "pam_putenv multiple times" =
 
 let%expect_test "pam_unsetenv" =
   let environment =
-    with_pam_exn ~f:(fun t ->
-      let open Or_error.Let_syntax in
-      let%bind () = pam_putenv t ~key ~data:"expect_test" in
-      let%bind () = pam_unsetenv t ~key in
-      pam_getenvlist t) ()
+    with_pam_exn
+      ~f:(fun t ->
+        let open Or_error.Let_syntax in
+        let%bind () = pam_putenv t ~key ~data:"expect_test" in
+        let%bind () = pam_unsetenv t ~key in
+        pam_getenvlist t)
+      ()
   in
   print_s [%message (environment : string list)];
   [%expect {| (environment ()) |}]
@@ -54,19 +60,22 @@ let%expect_test "empty env list" =
 
 let%expect_test "pam_getenvlist" =
   let environment =
-    with_pam_exn ~f:(fun t ->
-      let open Or_error.Let_syntax in
-      let%bind () =
-        List.map (List.range 1 10) ~f:(fun i ->
-          let key  = sprintf "PAM_TEST_%d" i in
-          let data = sprintf "expect_test_%d" i in
-          pam_putenv t ~key ~data)
-        |> Or_error.combine_errors_unit
-      in
-      pam_getenvlist t) ()
+    with_pam_exn
+      ~f:(fun t ->
+        let open Or_error.Let_syntax in
+        let%bind () =
+          List.map (List.range 1 10) ~f:(fun i ->
+            let key = sprintf "PAM_TEST_%d" i in
+            let data = sprintf "expect_test_%d" i in
+            pam_putenv t ~key ~data)
+          |> Or_error.combine_errors_unit
+        in
+        pam_getenvlist t)
+      ()
   in
   print_s [%message (environment : string list)];
-  [%expect {|
+  [%expect
+    {|
    (environment (
      PAM_TEST_1=expect_test_1
      PAM_TEST_2=expect_test_2
