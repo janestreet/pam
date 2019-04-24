@@ -169,48 +169,48 @@ end
 
 external pam_start_c
   :  string
-    -> string
-    -> ((Pam_conv.Message.t, string) Result.t list -> Pam_conv.Result.t)
-    -> (t, t * Pam_error.t) Result.t
+  -> string
+  -> ((Pam_conv.Message.t, string) Result.t list -> Pam_conv.Result.t)
+  -> (t, t * Pam_error.t) Result.t
   = "caml_pam_start"
 
 external pam_end_c : t -> unit Pam_result.t = "caml_pam_end"
 
 external pam_authenticate_c
   :  t
-    -> Pam_auth.Flag.t list
-    -> unit Pam_result.t
+  -> Pam_auth.Flag.t list
+  -> unit Pam_result.t
   = "caml_pam_authenticate"
 
 external pam_acct_mgmt_c
   :  t
-    -> Pam_acct.Flag.t list
-    -> unit Pam_result.t
+  -> Pam_acct.Flag.t list
+  -> unit Pam_result.t
   = "caml_pam_acct_mgmt"
 
 external pam_setcred_c
   :  t
-    -> bool
-    -> Pam_cred.Flag.t
-    -> unit Pam_result.t
+  -> bool
+  -> Pam_cred.Flag.t
+  -> unit Pam_result.t
   = "caml_pam_setcred"
 
 external pam_chauthtok_c
   :  t
-    -> Pam_authtok.Flag.t list
-    -> unit Pam_result.t
+  -> Pam_authtok.Flag.t list
+  -> unit Pam_result.t
   = "caml_pam_chauthtok"
 
 external pam_open_session_c
   :  t
-    -> Pam_session.Flag.t list
-    -> unit Pam_result.t
+  -> Pam_session.Flag.t list
+  -> unit Pam_result.t
   = "caml_pam_open_session"
 
 external pam_close_session_c
   :  t
-    -> Pam_session.Flag.t list
-    -> unit Pam_result.t
+  -> Pam_session.Flag.t list
+  -> unit Pam_result.t
   = "caml_pam_close_session"
 
 external pam_getenv_c : t -> string -> (string, string) Result.t = "caml_pam_getenv"
@@ -219,15 +219,15 @@ external pam_getenvlist_c : t -> (string list, string) Result.t = "caml_pam_gete
 
 external pam_get_item_c
   :  t
-    -> 'a Pam_item_type.t
-    -> 'a option Pam_result.t
+  -> 'a Pam_item_type.t
+  -> 'a option Pam_result.t
   = "caml_pam_get_item"
 
 external pam_set_item_c
   :  t
-    -> 'a Pam_item_type.t
-    -> 'a
-    -> unit Pam_result.t
+  -> 'a Pam_item_type.t
+  -> 'a
+  -> unit Pam_result.t
   = "caml_pam_set_item"
 
 external pam_strerror_c : t -> Pam_error.t -> string = "caml_pam_strerror"
