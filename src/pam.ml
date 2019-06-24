@@ -302,6 +302,7 @@ let pam_get_item (type a) t ~(item_type : a Pam_item_type.t) : a option Or_error
 ;;
 
 let pam_set_item (type a) t ~(item_type : a Pam_item_type.t) ~(item : a)
-  : unit Or_error.t =
+  : unit Or_error.t
+  =
   pam_set_item_c t item_type item |> pam_result_to_or_error ~op:"pam_set_item" t
 ;;
