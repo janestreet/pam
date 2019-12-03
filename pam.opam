@@ -14,7 +14,7 @@ depends: [
   "core"
   "ppx_jane"
   "conf-pam"
-  "dune"     {>= "1.5.1"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "OCaml bindings for the Linux-PAM library"
 description: "
