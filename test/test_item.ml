@@ -1,7 +1,7 @@
 open! Core
 open Import
 open Pam
-open Expect_test_helpers_kernel
+open Expect_test_helpers_core
 
 let get_item item_type = with_pam ~f:(pam_get_item ~item_type) ()
 let set_item item_type item = with_pam ~f:(pam_set_item ~item_type ~item) ()

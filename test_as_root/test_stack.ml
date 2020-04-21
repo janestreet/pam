@@ -3,7 +3,8 @@ open Async
 open Pam_test
 open Import
 open Pam
-open Expect_test_helpers
+open Expect_test_helpers_core
+open Expect_test_helpers_async
 
 module Env = struct
   type t =

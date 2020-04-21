@@ -1,7 +1,7 @@
 open! Core
 open Import
 open Pam
-open Expect_test_helpers_kernel
+open Expect_test_helpers_core
 
 let key = "OCAML_PAM_TEST"
 
