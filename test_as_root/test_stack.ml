@@ -30,8 +30,7 @@ let get_pam_config_lines auth_file session_file =
 
 let setup_pam_service file auth_file session_file =
   match%bind Sys.file_exists file with
-  | `Yes | `Unknown ->
-    failwithf "Test config %s exists before test data is setup" file ()
+  | `Yes | `Unknown -> failwithf "Test config %s exists before test data is setup" file ()
   | `No -> Writer.save_lines file (get_pam_config_lines auth_file session_file)
 ;;
 
