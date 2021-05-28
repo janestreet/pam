@@ -1,5 +1,6 @@
 open! Core
 open Pam
+module Unix = Core_unix
 
 let prompt_input msg ~echo =
   let term_set attr = Unix.Terminal_io.tcsetattr attr Unix.stdin ~mode:TCSANOW in
@@ -80,4 +81,4 @@ let command =
       main ~service ~user]
 ;;
 
-let () = Command.run command
+let () = Command_unix.run command
