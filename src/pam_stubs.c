@@ -247,7 +247,7 @@ CAMLprim value
 pam_message_to_value(const struct pam_message *m)
 {
   CAMLparam0();
-  CAMLlocal1(result);
+  CAMLlocal2(result, tmp);
 
   int msg_style = 0;
   char *buf = NULL;
@@ -275,9 +275,14 @@ pam_message_to_value(const struct pam_message *m)
     break;
   }
 
+  /* The following pattern is unsafe when `expr` allocates:
+
+    v = caml_alloc_small(...);
+    Field(v, ...) = expr; */
+  tmp = caml_copy_string(m->msg);
   result = caml_alloc_small(2, 0);
   Field(result, 0) = Val_int(msg_style);
-  Field(result, 1) = caml_copy_string(m->msg);
+  Field(result, 1) = tmp;
 
   CAMLreturn(alloc_ok(result));
 }
@@ -286,14 +291,20 @@ CAMLprim value
 pam_message_array_to_list(const struct pam_message **msg, int num_msg)
 {
   CAMLparam0();
-  CAMLlocal1(list);
+  CAMLlocal3(list, tmp1, tmp2);
 
   if (num_msg == 0) {
     CAMLreturn(Val_int(0));
   } else {
+    /* The following pattern is unsafe when `expr` allocates:
+
+       v = caml_alloc_small(...);
+       Field(v, ...) = expr; */
+    tmp1 = pam_message_to_value(*msg);
+    tmp2 = pam_message_array_to_list(msg + 1, num_msg - 1);
     list = caml_alloc_small(2, 0);
-    Field(list, 0) = pam_message_to_value(*msg);
-    Field(list, 1) = pam_message_array_to_list(msg + 1, num_msg - 1);
+    Field(list, 0) = tmp1;
+    Field(list, 1) = tmp2;
 
     CAMLreturn(list);
   }
@@ -552,14 +563,20 @@ CAMLprim value
 str_list_to_caml_list(char **str)
 {
   CAMLparam0();
-  CAMLlocal1(list);
+  CAMLlocal3(list, tmp0, tmp1);
 
   if (!*str) {
     CAMLreturn(Val_int(0));
   } else {
+    /* The following pattern is unsafe when `expr` allocates:
+
+       v = caml_alloc_small(...);
+       Field(v, ...) = expr; */
+    tmp0 = caml_copy_string(*str);
+    tmp1 = str_list_to_caml_list(str + 1);
     list = caml_alloc_small(2, 0);
-    Field(list, 0) = caml_copy_string(*str);
-    Field(list, 1) = str_list_to_caml_list(str + 1);
+    Field(list, 0) = tmp0;
+    Field(list, 1) = tmp1;
     CAMLreturn(list);
   }
 }
