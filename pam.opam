@@ -22,3 +22,6 @@ This provides OCaml bindings for the Linux-PAM (Pluggable Authentication
 Modules for Linux) library. It allows OCaml programs to delegate
 authentication tasks to the Linux-PAM framework.
 "
+depexts: [
+  ["pam-devel"] {os-family = "fedora"}
+]
