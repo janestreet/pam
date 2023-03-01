@@ -50,7 +50,10 @@ let with_custom_pam_stack ~auth_env ~session_env ~f =
     let%bind () = setup_pam_service pam_file auth_file session_file in
     let res = with_pam ~service ~f () in
     let%bind () =
-      Deferred.List.iter ~f:Unix.unlink [ pam_file; auth_file; session_file ]
+      Deferred.List.iter
+        ~how:`Sequential
+        ~f:Unix.unlink
+        [ pam_file; auth_file; session_file ]
     in
     return res)
 ;;
