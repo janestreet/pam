@@ -20,7 +20,7 @@ module Pam_conv = struct
       { style : style_t
       ; message : string
       }
-    [@@deriving bin_io, fields]
+    [@@deriving bin_io, fields ~getters ~iterators:create]
 
     (* The value here should not be changed without updating the code
        and constant values in [pam_stub.c] *)
@@ -37,7 +37,7 @@ module Pam_conv = struct
       { resp : string option
       ; resp_retcode : int
       }
-    [@@deriving bin_io, fields]
+    [@@deriving bin_io, fields ~iterators:create]
 
     (* Use custom create function as [pam] expects a constant [resp_retcode] *)
     let create ~resp = Fields.create ~resp ~resp_retcode:0

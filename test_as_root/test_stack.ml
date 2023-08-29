@@ -11,7 +11,7 @@ module Env = struct
     { key : string
     ; data : string
     }
-  [@@deriving fields]
+  [@@deriving fields ~getters ~iterators:create]
 
   let create = Fields.create
   let to_string t = sprintf "%s=%s" (key t) (data t)
