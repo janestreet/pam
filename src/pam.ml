@@ -244,17 +244,17 @@ let pam_result_to_or_error ~op t result =
 let pam_start ~service ~user ~conv =
   pam_start_c service user conv
   |> Result.map_error ~f:(fun (t, errnum) ->
-    let err_desc = pam_strerror t errnum in
-    ignore (pam_end_c t);
-    Error.of_string err_desc)
+       let err_desc = pam_strerror t errnum in
+       ignore (pam_end_c t);
+       Error.of_string err_desc)
 ;;
 
 let pam_end t =
   (* We cannot use [t] after [pam_end_c] so we have to come up with an error message *)
   pam_end_c t
   |> Result.map_error ~f:(fun errnum ->
-    Error.of_string
-      (pam_errmsg ~op:"pam_end" (sprintf "failed to release (errnum: %d)" errnum)))
+       Error.of_string
+         (pam_errmsg ~op:"pam_end" (sprintf "failed to release (errnum: %d)" errnum)))
 ;;
 
 let pam_authenticate t ~flags =

@@ -66,7 +66,6 @@ module Pam_authtok : sig
   end
 end
 
-
 type pam_conv
 type pam_fail_delay
 type pam_xauth_data

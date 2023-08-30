@@ -85,11 +85,7 @@ let test_pam_stack () =
 
 let%expect_test "full pam stack run" =
   let%bind () =
-    match%map
-      Monitor.try_with_or_error
-        ~rest:`Log
-        test_pam_stack
-    with
+    match%map Monitor.try_with_or_error ~rest:`Log test_pam_stack with
     | Error e -> print_s [%message "" ~_:(e : Error.t)]
     | Ok (auth_env, session_env) ->
       print_s [%message (auth_env : string) (session_env : string)]
