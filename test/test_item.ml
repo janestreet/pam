@@ -42,7 +42,8 @@ let%expect_test "pam_get_item" =
      (ruser        ())
      (rhost        ())
      (xdisplay     ())
-     (authtok_type ())) |}]
+     (authtok_type ()))
+    |}]
 ;;
 
 let%expect_test "pam_set_item" =
@@ -69,7 +70,8 @@ let%expect_test "pam_set_item" =
      (ruser        (ruser))
      (rhost        (rhost))
      (xdisplay     (xdisplay))
-     (authtok_type (authtok_type))) |}]
+     (authtok_type (authtok_type)))
+    |}]
 ;;
 
 (* get authtok related items outside service module is not allowed *)
@@ -90,8 +92,7 @@ let%expect_test "pam_set_item (bad item)" =
   let result = set_item Pam_item_type.PAM_OLDAUTHTOK "some value" in
   print_s [%message (result : unit Or_error.t)];
   [%expect
-    {|
-    (result (Error "[pam_set_item] Bad item passed to pam_*_item() (errnum: 29)")) |}]
+    {| (result (Error "[pam_set_item] Bad item passed to pam_*_item() (errnum: 29)")) |}]
 ;;
 
 let%expect_test "pam_get_item (unsupported item)" =

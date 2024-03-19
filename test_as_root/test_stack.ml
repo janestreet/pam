@@ -92,6 +92,7 @@ let%expect_test "full pam stack run" =
   in
   [%expect {|
     ((auth_env    auth_phase)
-     (session_env session_phase)) |}];
+     (session_env session_phase))
+    |}];
   return ()
 ;;

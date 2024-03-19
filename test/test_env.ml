@@ -76,15 +76,15 @@ let%expect_test "pam_getenvlist" =
   print_s [%message (environment : string list)];
   [%expect
     {|
-   (environment (
-     PAM_TEST_1=expect_test_1
-     PAM_TEST_2=expect_test_2
-     PAM_TEST_3=expect_test_3
-     PAM_TEST_4=expect_test_4
-     PAM_TEST_5=expect_test_5
-     PAM_TEST_6=expect_test_6
-     PAM_TEST_7=expect_test_7
-     PAM_TEST_8=expect_test_8
-     PAM_TEST_9=expect_test_9))
-  |}]
+    (environment (
+      PAM_TEST_1=expect_test_1
+      PAM_TEST_2=expect_test_2
+      PAM_TEST_3=expect_test_3
+      PAM_TEST_4=expect_test_4
+      PAM_TEST_5=expect_test_5
+      PAM_TEST_6=expect_test_6
+      PAM_TEST_7=expect_test_7
+      PAM_TEST_8=expect_test_8
+      PAM_TEST_9=expect_test_9))
+    |}]
 ;;
