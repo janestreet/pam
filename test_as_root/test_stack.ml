@@ -90,7 +90,8 @@ let%expect_test "full pam stack run" =
     | Ok (auth_env, session_env) ->
       print_s [%message (auth_env : string) (session_env : string)]
   in
-  [%expect {|
+  [%expect
+    {|
     ((auth_env    auth_phase)
      (session_env session_phase))
     |}];

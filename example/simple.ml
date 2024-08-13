@@ -47,11 +47,11 @@ let set_pam_service_item ~ctx item =
   let item_type = Pam_item_type.PAM_SERVICE in
   Pam.pam_get_item ctx ~item_type
   |> Or_error.map ~f:(fun s ->
-       printf "Before update, PAM_SERVICE=%s\n" (Option.value_exn s))
+    printf "Before update, PAM_SERVICE=%s\n" (Option.value_exn s))
   |> Or_error.bind ~f:(fun () -> Pam.pam_set_item ctx ~item_type ~item)
   |> Or_error.bind ~f:(fun () -> Pam.pam_get_item ctx ~item_type)
   |> Or_error.map ~f:(fun s ->
-       printf "After update, PAM_SERVICE=%s\n" (Option.value_exn s))
+    printf "After update, PAM_SERVICE=%s\n" (Option.value_exn s))
 ;;
 
 let main ~service ~user () =
@@ -67,8 +67,8 @@ let main ~service ~user () =
     |> Or_error.bind ~f:(fun () -> Pam.pam_close_session c ~flags:[])
     |> Or_error.bind ~f:(fun () -> Pam.pam_end c)
     |> (function
-    | Error e -> eprintf !"%{Error#hum}\n" e
-    | Ok () -> printf "pam session succeeds\n")
+     | Error e -> eprintf !"%{Error#hum}\n" e
+     | Ok () -> printf "pam session succeeds\n")
 ;;
 
 let command =
