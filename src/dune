@@ -5,7 +5,8 @@
  (name pam)
  (public_name pam)
  (libraries core)
- (library_flags -cclib -lpam -ccopt -O2)
+ (library_flags -ccopt -O2)
+ (c_library_flags :standard -lpam)
  (virtual_deps conf-pam)
  (preprocess
   (pps ppx_jane)))
