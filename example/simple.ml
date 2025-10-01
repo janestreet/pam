@@ -5,13 +5,10 @@ module Unix = Core_unix
 let prompt_input msg ~echo =
   let term_set attr = Unix.Terminal_io.tcsetattr attr Unix.stdin ~mode:TCSANOW in
   let term_attr = Unix.Terminal_io.tcgetattr Unix.stdin in
-  let old_echo = term_attr.c_echo in
   printf "%s%!" msg;
-  term_attr.c_echo <- echo;
-  term_set term_attr;
+  term_set { term_attr with c_echo = echo };
   let input = In_channel.input_line In_channel.stdin in
   printf "\n";
-  term_attr.c_echo <- old_echo;
   term_set term_attr;
   input
 ;;
