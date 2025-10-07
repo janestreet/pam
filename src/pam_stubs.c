@@ -437,7 +437,7 @@ caml_pam_start(value service, value user, value conv_func)
   } else {
     result = caml_alloc_tuple(2);
     Store_field(result, 0, ctx);
-    Store_field(result, 1, retval);
+    Store_field(result, 1, Val_int(retval));
     CAMLreturn(alloc_error(result));
   }
 }
