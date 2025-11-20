@@ -63,8 +63,7 @@ let ensure_running_as_root () =
 ;;
 
 let test_pam_stack () =
-  (* It requires root privileges to setup the desired pam configuration file
-     in /etc/pam.d *)
+  (* It requires root privileges to setup the desired pam configuration file in /etc/pam.d *)
   ensure_running_as_root ();
   let auth_env = Env.create ~key:"PAM_AUTH_TEST" ~data:"auth_phase" in
   let session_env = Env.create ~key:"PAM_SESSION_TEST" ~data:"session_phase" in

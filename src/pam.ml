@@ -22,8 +22,8 @@ module Pam_conv = struct
       }
     [@@deriving bin_io, fields ~getters ~iterators:create]
 
-    (* The value here should not be changed without updating the code
-       and constant values in [pam_stub.c] *)
+    (* The value here should not be changed without updating the code and constant values
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| 47df5cd77358f7105834f9fc0e807676 |}]
@@ -51,8 +51,8 @@ module Pam_conv = struct
 
     type t = (Response.t list, error_t) Result.t [@@deriving bin_io]
 
-    (* The value here should not be changed without updating the return
-       code and ordering in [pam_stub.c] *)
+    (* The value here should not be changed without updating the return code and ordering
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| 622288696dcfeb2b5599101c06a18a26 |}]
@@ -71,8 +71,8 @@ module Pam_auth = struct
       | PAM_DISALLOW_NULL_AUTHTOK
     [@@deriving bin_io]
 
-    (* The value here should not be changed without updating the return
-       code and ordering in [pam_stub.c] *)
+    (* The value here should not be changed without updating the return code and ordering
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| 1d56cbf13292909f3ae9b88709273566 |}]
@@ -87,8 +87,8 @@ module Pam_acct = struct
       | PAM_DISALLOW_NULL_AUTHTOK
     [@@deriving bin_io]
 
-    (* The value here should not be changed without updating the return
-       code and ordering in [pam_stub.c] *)
+    (* The value here should not be changed without updating the return code and ordering
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| 1d56cbf13292909f3ae9b88709273566 |}]
@@ -105,8 +105,8 @@ module Pam_cred = struct
       | PAM_REFRESH_CRED
     [@@deriving bin_io]
 
-    (* The value here should not be changed without updating the return
-       code and ordering in [pam_stub.c] *)
+    (* The value here should not be changed without updating the return code and ordering
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| f303df589fc8138228a35e94265f8eba |}]
@@ -121,8 +121,8 @@ module Pam_authtok = struct
       | PAM_CHANGE_EXPIRED_AUTHTOK
     [@@deriving bin_io]
 
-    (* The value here should not be changed without updating the return
-       code and ordering in [pam_stub.c] *)
+    (* The value here should not be changed without updating the return code and ordering
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| 99753ea70855ca8f8bf962a186395393 |}]
@@ -135,9 +135,9 @@ type pam_fail_delay
 type pam_xauth_data
 
 module Pam_item_type = struct
-  (* The value here should not be changed or re-ordred without updating the return
-     code and ordering in [pam_stub.c]. [bin_io] does not work with gadt so we cannot
-     create unit test case to check like others *)
+  (* The value here should not be changed or re-ordred without updating the return code
+     and ordering in [pam_stub.c]. [bin_io] does not work with gadt so we cannot create
+     unit test case to check like others *)
   type _ t =
     | PAM_SERVICE : string t
     | PAM_USER : string t
@@ -158,8 +158,8 @@ module Pam_session = struct
   module Flag = struct
     type t = PAM_SILENT [@@deriving bin_io]
 
-    (* The value here should not be changed without updating the return
-       code and ordering in [pam_stub.c] *)
+    (* The value here should not be changed without updating the return code and ordering
+       in [pam_stub.c] *)
     let%expect_test _ =
       print_endline [%bin_digest: t];
       [%expect {| 5c9ce93eee7315a34bbf88ee63a24a3e |}]
