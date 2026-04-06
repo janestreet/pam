@@ -9,4 +9,4 @@
  (c_library_flags :standard -lpam)
  (virtual_deps conf-pam)
  (preprocess
-  (pps ppx_jane)))
+  (pps ppx_jane -compare-require-explicit-locality)))
