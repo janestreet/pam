@@ -2,4 +2,4 @@
  (name pam_test)
  (libraries core pam expect_test_helpers_core)
  (preprocess
-  (pps ppx_jane)))
+  (pps ppx_jane -compare-require-explicit-locality)))
